@@ -2,6 +2,7 @@ package com.sky.service;
 
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.result.PageResult;
 
@@ -16,12 +17,9 @@ public interface EmployeeService {
 
     /**
      * 员工分页查询
-     * @param page
-     * @param pageSize
-     * @param name
      * @return
      */
-    //PageResult pageQuery(int page, int pageSize, String name);
+    PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
      * 新增员工

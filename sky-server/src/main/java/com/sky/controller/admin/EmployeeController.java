@@ -89,5 +89,14 @@ public class EmployeeController {
         employeeService.save(employeeDTO);
         return Result.success();
     }
+    /**
+     * 启用禁用员工
+     */
+    @PostMapping("/status/{status}")
+    public Result<String> startOrStop(@PathVariable Integer status, @RequestParam Long id){
+        log.info("启用禁用员工：{}，状态：{}", id, status);
+        employeeService.startOrStop(status, id);
+        return Result.success();
+    }
 
 }

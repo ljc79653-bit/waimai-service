@@ -26,4 +26,9 @@ public interface EmployeeService {
      */
     void save(EmployeeDTO employeeDTO);
 
+    /**
+     * 启用禁用员工
+     */
+    void startOrStop(Integer status, Long id);
+
 }

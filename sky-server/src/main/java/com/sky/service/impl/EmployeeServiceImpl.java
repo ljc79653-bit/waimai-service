@@ -106,5 +106,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    /**
+     * 启用禁用员工
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        //动态sql，update
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 编辑员工信息
+     */
+
 
 }

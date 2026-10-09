@@ -12,6 +12,9 @@ spring:
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
+  redis:
+    host: ${sky.redis.host}
+    port: ${sky.redis.port}
 
 mybatis:
   #mapper配置文件
@@ -38,8 +41,16 @@ sky:
     # 设置前端传递过来的令牌名称
     admin-token-name: token
 
+    user-secret-key: itheima
+    user-ttl: 14400000
+    user-token-name: authentication
+
   alioss:
     access-key-id: ${sky.alioss.access-key-id}
     bucket-name: ${sky.alioss.bucket-name}
     endpoint: ${sky.alioss.endpoint}
     access-key-secret: ${sky.alioss.access-key-secret}
+
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}

@@ -20,7 +20,7 @@ public class RedisConfiguration {
         // 设置key的序列化器
         template.setKeySerializer(new StringRedisSerializer());
         // 设置value的序列化器
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        //template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
 

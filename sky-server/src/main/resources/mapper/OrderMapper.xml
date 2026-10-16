@@ -9,4 +9,66 @@
             values (#{number}, #{status}, #{userId}, #{addressBookId}, #{orderTime}, #{checkoutTime}, #{payMethod}, #{payStatus}, #{amount}, #{remark}, #{phone}, #{address}, #{userName}, #{consignee}, #{cancelReason}, #{rejectionReason}, #{cancelTime}, #{estimatedDeliveryTime}, #{deliveryStatus}, #{deliveryTime}, #{packAmount}, #{tablewareNumber}, #{tablewareStatus})
 
     </insert>
+
+    <update id="update" parameterType="com.sky.entity.Orders">
+        update orders
+        <set>
+            <if test="cancelReason != null and cancelReason!='' ">
+                cancel_reason=#{cancelReason},
+            </if>
+            <if test="rejectionReason != null and rejectionReason!='' ">
+                rejection_reason=#{rejectionReason},
+            </if>
+            <if test="cancelTime != null">
+                cancel_time=#{cancelTime},
+            </if>
+            <if test="payStatus != null">
+                pay_status=#{payStatus},
+            </if>
+            <if test="payMethod != null">
+                pay_method=#{payMethod},
+            </if>
+            <if test="checkoutTime != null">
+                checkout_time=#{checkoutTime},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time = #{deliveryTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="pageQuery" resultType="Orders">
+        SELECT
+        o.*,
+        CONCAT(
+        IFNULL(a.province_name, ''),
+        IFNULL(a.city_name, ''),
+        IFNULL(a.district_name, ''),
+        IFNULL(a.detail, '')
+        ) AS address
+        FROM orders o
+        LEFT JOIN address_book a ON o.address_book_id = a.id
+        <where>
+            <if test="number != null and number != ''">
+                AND o.number LIKE CONCAT('%', #{number}, '%')
+            </if>
+            <if test="phone != null and phone != ''">
+                AND o.phone LIKE CONCAT('%', #{phone}, '%')
+            </if>
+            <if test="status != null">
+                AND o.status = #{status}
+            </if>
+            <if test="beginTime != null">
+                AND o.order_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                AND o.order_time &lt;= #{endTime}
+            </if>
+        </where>
+        ORDER BY o.order_time DESC
+    </select>
 </mapper>

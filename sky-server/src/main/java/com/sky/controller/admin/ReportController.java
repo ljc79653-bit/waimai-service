@@ -1,9 +1,9 @@
 package com.sky.controller.admin;
 
+import com.sky.dto.GoodsSalesDTO;
 import com.sky.result.Result;
 import com.sky.service.ReportService;
-import com.sky.vo.TurnoverReportVO;
-import com.sky.vo.UserReportVO;
+import com.sky.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,5 +41,25 @@ public class ReportController {
                                                    LocalDate end){
 
          return Result.success(reportService.userStatistics(begin, end));
+    }
+    /**
+     * 订单统计
+     */
+    @GetMapping("/ordersStatistics")
+    public Result<OrderReportVO> orderStatistics(@DateTimeFormat(pattern = "yyyy-MM-dd")
+                                                      LocalDate begin ,
+                                                 @DateTimeFormat(pattern = "yyyy-MM-dd")
+                                                      LocalDate end){
+        return Result.success(reportService.orderStatistics(begin, end));
+    }
+    /**
+     * 销量统计
+     */
+    @GetMapping("/top10")
+    public Result<SalesTop10ReportVO> salesStatistics(@DateTimeFormat(pattern = "yyyy-MM-dd")
+                                                     LocalDate begin ,
+                                                      @DateTimeFormat(pattern = "yyyy-MM-dd")
+                                                     LocalDate end){
+        return Result.success(reportService.salesStatistics(begin, end));
     }
 }
